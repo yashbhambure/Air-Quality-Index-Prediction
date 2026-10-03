@@ -39,14 +39,14 @@ npm run start -p 3000
 
 ## 3. Docker Deployment (Backend API)
 ```dockerfile
-FROM python:3.12-slim
+FROM python:3.11-slim
 WORKDIR /app
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 COPY . .
-RUN python train.py
 EXPOSE 5000
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
+CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:5000", "--workers", "1", "--threads", "4", "--timeout", "120"]
 ```
 Build & run:
 ```bash
