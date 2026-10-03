@@ -1,25 +1,29 @@
-# Slim Python environment optimized for memory-constrained hosting (e.g. Render 512MB free tier)
 FROM python:3.11-slim
 
 ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    MALLOC_ARENA_MAX=2 \
-    PORT=5000
+    PYTHONDONTWRITEBYTECODE=1
 
-WORKDIR /app
+# Create non-root user
+RUN useradd -m -u 1000 user
 
-# Upgrade pip and install dependencies with no cache
-COPY requirements.txt .
+USER user
+
+ENV HOME=/home/user \
+    PATH=/home/user/.local/bin:$PATH
+
+WORKDIR /home/user/app
+
+# Install dependencies
+COPY --chown=user requirements.txt .
+
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# Copy application source code and trained models
-COPY . .
+# Copy application and ML models
+COPY --chown=user . .
 
-# Expose backend port
-EXPOSE 5000
+# Railway dynamically provides PORT
+EXPOSE 8080
 
-# Run with 1 worker and 4 threads so the 105MB model is loaded into memory only ONCE
-# (2 separate worker processes would exceed 512MB RAM and cause OOM)
-CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:5000", "--workers", "1", "--threads", "4", "--timeout", "120"]
-
+# Start Gunicorn using Railway's PORT
+CMD ["sh", "-c", "gunicorn app:app --bind 0.0.0.0:${PORT:-8080} --workers 1 --threads 2 --timeout 120"]
