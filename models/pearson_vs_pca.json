@@ -1,0 +1,59 @@
+{
+  "note": "Raw Pearson r(pollutant, AQI) from city_day.csv vs PCA-weighted RF importances from metrics.json. See inject_feature_importances.py for methodology notes.",
+  "pearson_correlation_with_AQI": {
+    "PM10": 0.803313,
+    "CO": 0.683346,
+    "PM2.5": 0.659181,
+    "NO2": 0.537071,
+    "SO2": 0.490586,
+    "NOx": 0.48645,
+    "NO": 0.452191,
+    "Toluene": 0.279992,
+    "NH3": 0.252019,
+    "O3": 0.198991,
+    "Xylene": 0.165532,
+    "Benzene": 0.044407
+  },
+  "pearson_rank": {
+    "PM10": 1,
+    "CO": 2,
+    "PM2.5": 3,
+    "NO2": 4,
+    "SO2": 5,
+    "NOx": 6,
+    "NO": 7,
+    "Toluene": 8,
+    "NH3": 9,
+    "O3": 10,
+    "Xylene": 11,
+    "Benzene": 12
+  },
+  "pca_importance": {
+    "PM2.5": 0.108173,
+    "PM10": 0.11185,
+    "NO": 0.087758,
+    "NO2": 0.095692,
+    "NOx": 0.097815,
+    "NH3": 0.06356,
+    "CO": 0.118409,
+    "SO2": 0.065223,
+    "O3": 0.050151,
+    "Benzene": 0.069863,
+    "Toluene": 0.072994,
+    "Xylene": 0.058514
+  },
+  "pca_rank": {
+    "CO": 1,
+    "PM10": 2,
+    "PM2.5": 3,
+    "NOx": 4,
+    "NO2": 5,
+    "NO": 6,
+    "Toluene": 7,
+    "Benzene": 8,
+    "SO2": 9,
+    "NH3": 10,
+    "Xylene": 11,
+    "O3": 12
+  }
+}

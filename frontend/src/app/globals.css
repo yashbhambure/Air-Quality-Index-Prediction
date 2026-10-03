@@ -1,0 +1,570 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/google-sans');
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Google Sans Regular'), local('Google Sans'), local('Product Sans'),
+       url('https://fonts.cdnfonts.com/s/14955/ProductSans-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('Google Sans Medium'), local('Google Sans'), local('Product Sans Medium'),
+       url('https://fonts.cdnfonts.com/s/14955/ProductSans-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Google Sans Medium'), local('Google Sans Bold'), local('Product Sans Bold'),
+       url('https://fonts.cdnfonts.com/s/14955/ProductSans-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Google Sans Bold'), local('Google Sans'), local('Product Sans Bold'),
+       url('https://fonts.cdnfonts.com/s/14955/ProductSans-Bold.woff') format('woff');
+}
+
+@theme {
+  --font-sans: 'Google Sans', 'Google Sans Flex', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-display: 'Google Sans', 'Google Sans Flex', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'Google Sans', 'Google Sans Flex', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ────────────────────────────────────────────────
+   Atmospheric Intelligence Theme Tokens
+   Dark Graphite (#0B0F14) + Cyan/Teal Intelligence (#35D0C5)
+   Strictly Semantic CPCB AQI Colors
+   ──────────────────────────────────────────────── */
+:root {
+  /* Google Sans Typography Tokens */
+  --font-google-sans:    'Google Sans', 'Google Sans Flex', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono:           'Google Sans', 'Google Sans Flex', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* Core Backgrounds & Surfaces */
+  --bg-primary:          #0B0F14; /* Deep atmospheric graphite */
+  --bg-secondary:        #10161D; /* Secondary panel background */
+  --surface-elevated:    #151C24; /* Elevated container surface */
+  --surface-card:        #18212B; /* Interactive card surface */
+  --surface-card-hover:  #1E2936; /* Card hover state */
+  
+  /* Borders & Grid Rules */
+  --border-default:      #2A3746; /* 1px crisp rule */
+  --border-subtle:       #202A34; /* Hairline separator */
+  --border-active:       #35D0C5; /* Focused / active border */
+
+  /* Typography Hierarchy - Maximum Visibility Enhancement */
+  --text-primary:        #FFFFFF; /* Ultra-crisp high contrast primary text */
+  --text-secondary:      #CBD5E1; /* Clean high-contrast slate labels */
+  --text-muted:          #94A3B8; /* High-readability silver slate (contrast > 7:1) */
+  --text-dimmed:         #8292A1; /* Clearly visible captions & metadata */
+
+  /* Primary Intelligence Accent */
+  --accent-cyan:         #35D0C5; /* Primary intelligence accent */
+  --accent-cyan-light:   #5CE1E6; /* Secondary bright accent */
+  --accent-glow:         rgba(53, 208, 197, 0.16);
+  --accent-glow-strong:  rgba(53, 208, 197, 0.32);
+
+  /* Semantic CPCB Severity Colors (Strictly for Air Quality Data) */
+  --cpcb-good:           #3CCB8E; /* 0–50 */
+  --cpcb-satisfactory:   #A8D85A; /* 51–100 */
+  --cpcb-moderate:       #F3C969; /* 101–200 */
+  --cpcb-poor:           #F39A4A; /* 201–300 */
+  --cpcb-verypoor:       #F05B5B; /* 301–400 */
+  --cpcb-severe:         #B83B5E; /* 401–500 */
+
+  /* Backward-compatible Aliases */
+  --sky-base:            var(--bg-primary);
+  --haze-surface:        var(--surface-elevated);
+  --haze-elevated:       var(--surface-card);
+  --dust-border:         var(--border-default);
+  --dust-border-subtle:  var(--border-subtle);
+  --breath-text:         var(--text-primary);
+  --haze-muted:          var(--text-secondary);
+  --haze-dimmed:         var(--text-muted);
+  --solar-data:          var(--accent-cyan);
+  --ink:                 var(--bg-primary);
+}
+
+/* ────────────────────────────────────────────────
+   Base Reset & Global Styles (Google Sans Theme)
+   ──────────────────────────────────────────────── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    font-family: var(--font-google-sans) !important;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+    color-scheme: dark;
+    font-family: var(--font-google-sans) !important;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-google-sans) !important;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  button, input, optgroup, select, textarea, pre, code, kbd, samp {
+    font-family: var(--font-google-sans) !important;
+  }
+
+  /* Number input: hide native spinner buttons to avoid layout cramping */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+}
+
+.font-display {
+  font-family: var(--font-google-sans) !important;
+}
+
+.font-mono {
+  font-family: var(--font-google-sans) !important;
+}
+
+.font-sans {
+  font-family: var(--font-google-sans) !important;
+}
+
+/* ────────────────────────────────────────────────
+   Values and Telemetry (Google Sans with Tabular Nums)
+   Strictly unified to Google Sans font style across the whole site
+   ──────────────────────────────────────────────── */
+.font-preserved-value,
+.font-aqi-value,
+span.font-preserved-value,
+div.font-preserved-value,
+td.font-preserved-value {
+  font-family: var(--font-google-sans) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ────────────────────────────────────────────────
+   High Visibility Text Overrides for Legacy Classes
+   Guarantees all text across the entire website is crystal clear
+   ──────────────────────────────────────────────── */
+.text-\[\#64717E\],
+[class*="text-[#64717E]"] {
+  color: #94A3B8 !important;
+}
+
+.text-\[\#47535E\],
+[class*="text-[#47535E]"] {
+  color: #8292A1 !important;
+}
+
+.text-\[\#9AA7B4\],
+[class*="text-[#9AA7B4]"] {
+  color: #CBD5E1 !important;
+}
+
+.text-\[\#F2F5F7\],
+[class*="text-[#F2F5F7]"] {
+  color: #FFFFFF !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #94A3B8 !important;
+  opacity: 1 !important;
+}
+
+/* ────────────────────────────────────────────────
+   Strict Card Surface Opacity (Solid Surfaces - Never Transparent)
+   ──────────────────────────────────────────────── */
+.bg-\[\#151C24\],
+[class*="bg-[#151C24]"] {
+  background-color: #151C24 !important;
+  opacity: 1 !important;
+}
+
+.bg-\[\#18212B\],
+[class*="bg-[#18212B]"] {
+  background-color: #18212B !important;
+  opacity: 1 !important;
+}
+
+.bg-\[\#10161D\],
+[class*="bg-[#10161D]"] {
+  background-color: #10161D !important;
+  opacity: 1 !important;
+}
+
+.bg-\[\#121820\],
+[class*="bg-[#121820]"] {
+  background-color: #121820 !important;
+  opacity: 1 !important;
+}
+
+/* ────────────────────────────────────────────────
+   Technical Grid & Subtle Atmospheric Background
+   ──────────────────────────────────────────────── */
+.bg-tech-grid {
+  background-image: 
+    linear-gradient(to right, rgba(38, 49, 61, 0.25) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(38, 49, 61, 0.25) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.glow-cyan-subtle {
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.glow-cyan-border {
+  box-shadow: 0 0 0 1px var(--accent-cyan), 0 0 16px var(--accent-glow);
+}
+
+/* ────────────────────────────────────────────────
+   Accessibility: Focus States
+   ──────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+/* ────────────────────────────────────────────────
+   Scrollbar — slim, technical
+   ──────────────────────────────────────────────── */
+::-webkit-scrollbar { 
+  width: 5px; 
+  height: 5px; 
+}
+::-webkit-scrollbar-track { 
+  background: var(--bg-primary); 
+}
+::-webkit-scrollbar-thumb { 
+  background: var(--border-default); 
+  border-radius: 4px; 
+}
+::-webkit-scrollbar-thumb:hover { 
+  background: var(--text-muted); 
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ────────────────────────────────────────────────
+   Precision Range Sliders
+   ──────────────────────────────────────────────── */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border-default);
+  outline: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  border: 2px solid var(--bg-primary);
+  box-shadow: 0 0 6px var(--accent-glow);
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+  background: var(--accent-cyan-light);
+  box-shadow: 0 0 10px var(--accent-glow-strong);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  border: 2px solid var(--bg-primary);
+  box-shadow: 0 0 6px var(--accent-glow);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.25);
+}
+
+/* ────────────────────────────────────────────────
+   Recharts Chart Overrides (Dark Analytical Theme)
+   ──────────────────────────────────────────────── */
+.recharts-wrapper,
+.recharts-surface {
+  overflow: visible !important;
+}
+
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: #151C24 !important;
+  border: 1px solid #26313D !important;
+  border-radius: 8px !important;
+  color: #FFFFFF !important;
+  font-family: 'Google Sans', sans-serif !important;
+  font-size: 11px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7) !important;
+  padding: 8px 12px !important;
+}
+
+.recharts-tooltip-label {
+  color: #FFFFFF !important;
+  font-family: 'Google Sans', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  margin-bottom: 4px !important;
+}
+
+.recharts-tooltip-item-list {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+.recharts-tooltip-item {
+  color: #E2E8F0 !important; /* text-slate-200 */
+  font-family: 'Google Sans', sans-serif !important;
+  font-size: 11px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+.recharts-tooltip-item-name {
+  color: #E2E8F0 !important; /* text-slate-200 */
+  font-family: 'Google Sans', sans-serif !important;
+}
+
+.recharts-tooltip-item-separator {
+  color: #E2E8F0 !important;
+  font-family: 'Google Sans', sans-serif !important;
+}
+
+.recharts-tooltip-item-value {
+  color: #67E8F9 !important; /* text-cyan-300 */
+  font-family: 'Google Sans', sans-serif !important;
+  font-weight: 600 !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+.recharts-cartesian-axis-tick-value {
+  fill: var(--text-muted) !important;
+  font-size: 10px !important;
+  font-family: var(--font-google-sans) !important;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: var(--border-subtle) !important;
+  stroke-dasharray: 3 3;
+}
+
+/* ────────────────────────────────────────────────
+   Skeleton Loading State
+   ──────────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface-elevated) 25%,
+    var(--surface-card) 50%,
+    var(--surface-elevated) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to   { background-position:  200% 0; }
+}
+
+/* ────────────────────────────────────────────────
+   Pulsing Live Dot Animation
+   ──────────────────────────────────────────────── */
+@keyframes pulse-dot {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(60, 203, 142, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(60, 203, 142, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(60, 203, 142, 0);
+  }
+}
+
+.live-dot-pulse {
+  animation: pulse-dot 2s infinite;
+}
+
+/* ────────────────────────────────────────────────
+   Dynamic Atmospheric Intelligence Grid & Glow
+   Stationary technical coordinate system + data-reactive pulse
+   ──────────────────────────────────────────────── */
+@keyframes atmospheric-breathe {
+  0% {
+    transform: translate3d(-50%, 0, 0) scale(0.97);
+    opacity: 0.82;
+  }
+  50% {
+    transform: translate3d(-50%, 6px, 0) scale(1.03);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0) scale(0.97);
+    opacity: 0.82;
+  }
+}
+
+@keyframes atmospheric-breathe-secondary {
+  0% {
+    transform: scale(1.02);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(0.96);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1.02);
+    opacity: 0.55;
+  }
+}
+
+@keyframes grid-inference-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.65);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.35);
+    opacity: 0;
+  }
+}
+
+.atmospheric-ambient-glow {
+  animation: atmospheric-breathe 14s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.atmospheric-ambient-glow-secondary {
+  animation: atmospheric-breathe-secondary 18s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.data-reactive-pulse {
+  animation: grid-inference-pulse 1.35s cubic-bezier(0.12, 0.9, 0.25, 1) forwards;
+  will-change: transform, opacity;
+}
+
+/* Mobile responsive constraints */
+@media (max-width: 640px) {
+  .atmospheric-ambient-glow {
+    width: 140vw !important;
+    height: 380px !important;
+    filter: blur(80px) !important;
+  }
+  .atmospheric-ambient-glow-secondary {
+    display: none !important;
+  }
+  .data-reactive-pulse {
+    width: 90vw !important;
+    height: 320px !important;
+  }
+}
+
+/* Accessibility: prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .atmospheric-ambient-glow,
+  .atmospheric-ambient-glow-secondary {
+    animation: none !important;
+    transform: translate3d(-50%, 0, 0) !important;
+    opacity: 0.85 !important;
+  }
+  .data-reactive-pulse {
+    display: none !important;
+    animation: none !important;
+  }
+  .infinite-grid-drift {
+    animation: none !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+}
+
+/* ────────────────────────────────────────────────
+   Infinite Moving Technical Grid
+   Continuous, seamless diagonal drift (↘) with zero visible reset
+   Period: exactly 200px (5x 40px minor cells, 1x major cell)
+   ──────────────────────────────────────────────── */
+@keyframes infinite-grid-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(200px, 200px, 0);
+  }
+}
+
+.infinite-grid-drift {
+  animation: infinite-grid-drift 32s linear infinite;
+  will-change: transform;
+}
+
+@media (max-width: 640px) {
+  .infinite-grid-drift {
+    opacity: 0.45 !important;
+  }
+}
+
+
