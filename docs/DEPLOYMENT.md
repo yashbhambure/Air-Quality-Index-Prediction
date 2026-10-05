@@ -57,10 +57,33 @@ docker run -p 5000:5000 aqi-backend
 ---
 
 ## 4. Cloud Platforms
-- **Backend (Render / Railway / Fly.io)**: Point to root repository, set start command `gunicorn app:app`, expose port 5000.
-- **Frontend (Vercel / Cloudflare / Netlify)**: Point to `frontend/` directory, set build command `npm run build`, output `.next`. Set `NEXT_PUBLIC_API_URL` to the backend URL.
+
+### Hugging Face Spaces (Recommended for Backend ML API)
+Hugging Face Spaces provides **16 GB RAM and 2 vCPUs completely free**, which easily fits the ~105MB Random Forest model without memory limits.
+
+1. **Create Space**: On [huggingface.co/new-space](https://huggingface.co/new-space), set SDK to **Docker (Blank)** and hardware to **Free (16 GB RAM)**.
+2. **Add Secret**: Under Space **Settings -> Variables and secrets -> Secrets**, add `WAQI_API_KEY`.
+3. **Deploy via Git**:
+   ```bash
+   git remote add space https://huggingface.co/spaces/<username>/<space-name>
+   git push space main
+   ```
+4. **Live API**: The REST endpoints (`/api/predict`, `/api/metrics`, `/api/live/<city>`) will be available at:
+   `https://<username>-<space-name>.hf.space`
+
+### Other Backend Options (Railway / Fly.io / Render)
+- Point to root repository, set start command `gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --threads 4`.
+
+### Frontend Dashboard (Vercel / Cloudflare / Netlify)
+- Point to the `frontend/` directory.
+- Set build command `npm run build`, output `.next`.
+- In project environment variables, set:
+  ```env
+  NEXT_PUBLIC_API_URL=https://<username>-<space-name>.hf.space
+  ```
 
 ## Environment Variables
-- `PORT` — Flask port (defaults to 5000).
+- `PORT` — Flask port (defaults to 7860 on Hugging Face Spaces, 5000 locally).
+- `WAQI_API_KEY` — World Air Quality Index token for live station benchmarking.
 - `NEXT_PUBLIC_API_URL` — Backend API base URL for Next.js (defaults to `http://localhost:5000`).
 

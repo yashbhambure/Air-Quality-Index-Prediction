@@ -1,3 +1,13 @@
+---
+title: Air Quality Index Prediction API
+emoji: 🌫️
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # 🌫️ Air Quality Index Prediction — Random Forest + PCA
 
 [![Python](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/)
