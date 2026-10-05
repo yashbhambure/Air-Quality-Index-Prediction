@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
-const backendUrl = process.env.FLASK_BACKEND_URL || "http://127.0.0.1:5000";
+let rawBackendUrl = process.env.FLASK_BACKEND_URL?.trim() || "http://127.0.0.1:5000";
+if (!rawBackendUrl.startsWith("http://") && !rawBackendUrl.startsWith("https://")) {
+  rawBackendUrl = `https://${rawBackendUrl}`;
+}
+const backendUrl = rawBackendUrl.replace(/\/+$/, "");
 
 const nextConfig: NextConfig = {
   async rewrites() {
